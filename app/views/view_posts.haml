@@ -1,0 +1,10 @@
+.span12
+	%h2= @info['user']['name']
+	%p.lead Here are your blog posts formatted as markdown, with a Scriptogr.am specific header block. 
+
+	%p.lead Copy and paste each post into a separate .md file, and place them in your Scriptogr.am app folder on Dropbox. Go to your Scriptogr.am dashboard and sync it with your Dropbox to publish the posts. 
+
+- @posts_as_md.each do |post|
+	.span12.post
+		%p
+			= post.gsub("\n",'<br>')
