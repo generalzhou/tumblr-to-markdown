@@ -15,13 +15,11 @@ get '/oauth' do
 end
 
 get '/authorize' do
-  if session[:access_token]
-    redirect '/view_posts'
-  else
+  unless session[:access_token]
     request_token = session[:request_token]
-    access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
-    session[:access_token] = access_token
+    session[:access_token] = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
   end
+  redirect '/view_posts'
 end
 
 get '/view_posts' do
